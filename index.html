@@ -3,14 +3,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <title>GET CLEAN : ESCAPE THE DRUGS MADE BY THEO</title>
-
-  <!-- Mobile responsive scaling -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <link rel="stylesheet" href="./logos/css/pacman10-hp.12.css"/>
   <link rel="stylesheet" href="./logos/css/pacman10-hp.11.css"/>
+  <!-- Added Pac-Man style font from Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-
   <style>
     html, body {
       margin: 0;
@@ -21,28 +17,25 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center; /* vertical centering */
+      justify-content: center;
       background-color: #000000;
     }
-
+    
     center {
       width: 100%;
-      max-width: 100%;
+      height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center; /* vertical centering */
-      min-height: 100%;
+      justify-content: center;
     }
-
+    
     #lga {
-      width: 100%;
-      max-width: 600px; /* desktop/iPad cap */
-      height: auto;
-      transform: scale(1);
-      margin: 0 auto 20px auto; /* centered horizontally with spacing below */
+      transform: scale(1.2);
+      margin-bottom: 20px;
     }
-
+    
+    /* Updated title styling with Pac-Man font and yellow color */
     .game-title {
       color: #FFFF00;
       font-family: 'Press Start 2P', cursive;
@@ -53,7 +46,8 @@
       letter-spacing: 2px;
       text-shadow: 3px 3px 0px #FF0000;
     }
-
+    
+    /* Added description styling with Pac-Man colors */
     .game-description {
       color: #00FFFF;
       font-family: 'Press Start 2P', cursive;
@@ -66,11 +60,12 @@
       border: 3px solid #FFFF00;
       background-color: #1a1a1a;
     }
-
+    
+    /* Added search box styling with Pac-Man theme */
     .search-container {
       margin-bottom: 20px;
     }
-
+    
     .search-container input[type="text"] {
       font-family: 'Press Start 2P', cursive;
       font-size: 12px;
@@ -79,9 +74,8 @@
       background-color: #000000;
       color: #FFFF00;
       width: 400px;
-      max-width: 90vw; /* fits on mobile */
     }
-
+    
     .search-container input[type="submit"] {
       font-family: 'Press Start 2P', cursive;
       font-size: 12px;
@@ -92,30 +86,45 @@
       cursor: pointer;
       margin-left: 10px;
     }
-
+    
     .search-container input[type="submit"]:hover {
       background-color: #CC0000;
     }
-
+    
+    /* Hide the original game controls (search box and buttons) while keeping them in DOM for game initialization */
     #hplogo-f {
       display: none;
     }
   </style>
-
+  
+  <!-- Added script BEFORE game loads to intercept any redirect attempts -->
   <script type="text/javascript">
-    // Prevent redirects
+    // Override window.location to prevent redirects
     (function() {
       const originalLocation = window.location;
+      
+      // Intercept any attempts to change window.location.href
       Object.defineProperty(window, 'location', {
-        get: function() { return originalLocation; },
-        set: function(value) { window.location.reload(); }
+        get: function() {
+          return originalLocation;
+        },
+        set: function(value) {
+          // If trying to redirect, reload the page instead
+          console.log('[v0] Redirect attempt blocked, reloading game instead');
+          window.location.reload();
+        }
       });
-
+      
+      // Also intercept direct href changes
       const originalHref = Object.getOwnPropertyDescriptor(Location.prototype, 'href');
       Object.defineProperty(Location.prototype, 'href', {
-        get: function() { return originalHref.get.call(this); },
+        get: function() {
+          return originalHref.get.call(this);
+        },
         set: function(value) {
+          // Check if it's trying to redirect to a search
           if (value.includes('google.com/search') || value.includes('pacman')) {
+            console.log('[v0] Search redirect blocked, reloading game instead');
             window.location.reload();
           } else {
             originalHref.set.call(this, value);
@@ -125,46 +134,47 @@
     })();
   </script>
 </head>
-<body bgcolor="#000000" text="#ffffff" link="#4d90fe" vlink="#551a8b" alink="#ff0000">
+<body bgcolor=#000000 text=#ffffff link=#4d90fe vlink=#551a8b alink=#ff0000>
   <center>
+    <!-- Added visible title -->
     <h1 class="game-title">GET CLEAN WITH PAC MAN:<br>ESCAPE THE DRUGS<br>MADE BY THEO</h1>
-
+    
+    <!-- Added educational description -->
     <div class="game-description">
       The purpose of this activity is to educate individuals about drugs through a classic arcade game with a creative twist. For those who want to dig deeper, there’s also a built-in Google search box that allows you to research drugs and their negative effects directly.
     </div>
-
+    
+    <!-- Added Google search box for drug research -->
     <div class="search-container">
       <form action="https://www.google.com/search" method="get" target="_blank">
         <input type="text" name="q" placeholder="RESEARCH DRUGS HERE..." required>
         <input type="submit" value="SEARCH">
       </form>
     </div>
-
-    <div id="lga">
-      <div id="hplogo" title="PAC-MAN's 30th Birthday! Doodle with PAC-MAN™ & ©1980 NAMCO BANDAI Games Inc.">
-        <div id="hplogo-l">
-          <div id="hplogo-b"></div>
+    
+    <div id=lga>
+      <div id=hplogo title="PAC-MAN's 30th Birthday! Doodle with PAC-MAN™ & ©1980 NAMCO BANDAI Games Inc.">
+        <div id=hplogo-l>
+          <div id=hplogo-b></div>
         </div>
       </div>
     </div>
-
-    <form id="hplogo-f" action="http://www.google.com/search" name="gbqf">
+    <form id=hplogo-f action="http://www.google.com/search" name=gbqf>
       <div class="ds" style="height:32px;margin:4px 0">
-        <input autocomplete="off" maxlength="2048" name="q" class="lst" title="Google Search" value="" size="57" style="border:1px solid #ccc;border-bottom-color:#999;border-right-color:#999;font:18px arial,sans-serif bold;height:25px;margin:0;padding:5px 8px 0 6px;vertical-align:top" spellcheck="false">
+        <input autocomplete="off" onblur="google&amp;&amp;google.fade&amp;&amp;google.fade()" maxlength="2048" name="q" class="lst" title="Google Search" value="" size="57" style="border:1px solid #ccc;border-bottom-color:#999;border-right-color:#999;font:18px arial,sans-serif bold;height:25px;margin:0;padding:5px 8px 0 6px;vertical-align:top" spellcheck="false">
       </div>
-      <table cellpadding="0" cellspacing="0">
-        <tr valign="top">
-          <td align="center" nowrap><br style="line-height:0"><span class="ds"><span class="lsbb"><input name="btnG" type="submit" value="Google Search" class="lsb"></span></span></td>
-          <td align="center" nowrap><br style="line-height:0"><span class="ds"><span class="lsbb"><input name="btnI" type="submit" value="Insert Coin" class="lsb"></span></span></td>
+      <table cellpadding=0 cellspacing=0>
+        <tr valign=top>
+          <td align=center nowrap><br style="line-height:0"><span class=ds><span class=lsbb><input name=btnG type=submit value="Google Search" class=lsb onclick="this.checked=1"></span></span></td>
+          <td align=center nowrap><br style="line-height:0"><span class=ds><span class=lsbb><input name=btnI type=submit value="Insert Coin" class=lsb onclick="this.checked=1"></span></span></td>
         </tr>
       </table>
     </form>
   </center>
-
   <script type="text/javascript" src="./logos/js/pacman10-hp.12.1.js"></script>
-
+  
+  <!-- Prevent game over redirect and restart game instead -->
   <script type="text/javascript">
-    // Prevent game over redirect
     document.addEventListener('DOMContentLoaded', function() {
       const form = document.getElementById('hplogo-f');
       if (form) {
@@ -173,28 +183,48 @@
           window.location.reload();
           return false;
         });
-
-        const buttons = form.querySelectorAll('input[type="submit"]');
-        buttons.forEach(button => {
-          button.addEventListener('click', function(e) {
-            e.preventDefault();
-            window.location.reload();
-            return false;
-          });
-        });
       }
+      
+      const buttons = form.querySelectorAll('input[type="submit"]');
+      buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.location.reload();
+          return false;
+        });
+      });
     });
-
-    // WASD keyboard support
+  </script>
+  
+  <!-- Added WASD keyboard support -->
+  <script type="text/javascript">
     document.addEventListener('keydown', function(e) {
-      const keyMap = { 'w': 38, 'a': 37, 's': 40, 'd': 39 };
+      // Map WASD to arrow keys
+      const keyMap = {
+        'w': 38, // W -> Up Arrow
+        'a': 37, // A -> Left Arrow
+        's': 40, // S -> Down Arrow
+        'd': 39  // D -> Right Arrow
+      };
+      
       const key = e.key.toLowerCase();
+      
       if (keyMap[key]) {
+        // Prevent default behavior
         e.preventDefault();
-        const arrowEvent = new KeyboardEvent('keydown', { keyCode: keyMap[key], which: keyMap[key], bubbles: true, cancelable: true });
+        
+        // Create and dispatch a new keyboard event with the arrow key code
+        const arrowEvent = new KeyboardEvent('keydown', {
+          keyCode: keyMap[key],
+          which: keyMap[key],
+          bubbles: true,
+          cancelable: true
+        });
+        
         document.dispatchEvent(arrowEvent);
       }
     });
   </script>
 </body>
 </html>
+
